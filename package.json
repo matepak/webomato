@@ -1,0 +1,8 @@
+{
+    "name": "webomato",
+    "description": "pomodoro timer",
+    "authors": "Mateusz Szczupak",
+    "version": "0.0.1",
+    "main": "pathToMain",
+    "dependencies": {}
+}

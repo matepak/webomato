@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: #ff471a;
+}
+
+.far {
+  color: white;
+}
+
+.flex-container {
+  width: 100%;
+  height: 100%;
+  list-style: none;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  -ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.column {
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+.button-row {
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  padding-bottom: 32px;
+}
+
+#stop-btn {
+  display: none;
+}
+
+.timer-base {
+  border-radius: 25px;
+  width: 450px;
+  height: 450px;
+  background-color: salmon;
+}
+
+.timer {
+  font-size: 100px;
+  font-family: "Space Mono", monospace;
+  color: white;
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content:left;
+  padding-left: 5px;
+  border: 2px solid whitesmoke;
+  border-radius: 25px;
+  min-height: 40px;
+  width: 330px;
+}
+
+#message-field {
+  visibility: hidden;
+  font-family: "Press Start 2P", cursive;
+  font-size: 50px;
+  color: wheat;
+}
