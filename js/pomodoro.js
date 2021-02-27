@@ -1,7 +1,6 @@
-import { timerField, controlButton } from "./variables.js";
-import Timer from "./timer.js";
+importScripts("./timer.js");
 
-export class Pomodoro {
+class Pomodoro {
   constructor(
     pomodoroTime = 25,
     shortBreakTime = 5,
@@ -19,28 +18,43 @@ export class Pomodoro {
     this.updateTimer();
   }
 
+  actionObject = {
+    updateTimerElement: function (data) {
+      return { action: "updateTimerElement", actionData: data };
+    },
+    updateProgressBar: function () {
+      return { action: "updateProgressBar", actionData: null };
+    },
+
+    clearProgressBar: function () {
+      return { action: "clearProogressBar", actionData: null };
+    },
+    stopTimer: function () {
+      return { action: "stopTimer", actionData: null };
+    },
+  };
+
   updateTimer() {
-    timerField.innerText = this.timer.getTimer();
+    postMessage(this.actionObject.updateTimerElement(this.timer.getTimer()));
   }
 
   start() {
+    this.lastPomodoroRun = !this.lastPomodoroRun;
     this.intervalId = setInterval(() => {
       this.isRunning = this.timer.tick();
-      if (!this.isRunning) this.stop();
+      if (!this.isRunning) {
+        postMessage(this.actionObject.stopTimer());
+      }
       this.updateTimer();
     }, 1000);
-    this.clearBar();
+    postMessage(this.actionObject.clearProgressBar());
     this.progressBar();
   }
 
   stop() {
-    this.lastPomodoroRun = !this.lastPomodoroRun;
     this.nextTimer();
     clearInterval(this.intervalId);
-    this.playSound();
     clearInterval(this.progressBarIntervalId);
-    controlButton.className = "far fa-play-circle fa-5x"
-
   }
 
   pause() {
@@ -50,46 +64,27 @@ export class Pomodoro {
 
   nextTimer() {
     this.timer.reset();
-    this.breakHandler();
+    this.timer.minutes = this.breakHandler();
     this.updateTimer();
   }
 
   breakHandler() {
+    if (!this.lastPomodoroRun) return this.pomodoroTime;
+    if (this.lastPomodoroRun) this.shortBreakesLeft -= 1;
     if (this.shortBreakesLeft === 0) {
-      this.shortBreakesLeft = 4;
-      this.currentBreakTime = this.longBreakTime;
-      console.log(this.currentBreakTime);
+      return this.longBreakTime;
     } else {
-      this.currentBreakTime = this.shortBreakTime;
+      return this.shortBreakTime;
     }
-
-    if (this.lastPomodoroRun) {
-      this.timer.minutes = this.currentBreakTime;
-      this.shortBreakesLeft = --this.shortBreakesLeft;
-      console.log(this.shortBreakesLeft);
-    } else {
-      this.timer.minutes = this.pomodoroTime;
-    }
-  }
-
-  playSound() {
-    let audio = new Audio("./ding.mp3");
-    audio.play();
   }
 
   progressBar() {
     let duration = this.timer.getMinutes();
-    if(duration < 1) duration = 1;
+    if (duration < 1) duration = 1;
     this.progressBarInterval = (duration * 60 * 1000) / 10;
 
     this.progressBarIntervalId = setInterval(() => {
-      document.getElementById(
-        "progress-bar"
-      ).innerHTML += `<img src="./favicon-32.png" alt="tomato">`;
+      postMessage(this.actionObject.updateProgressBar());
     }, this.progressBarInterval);
-  }
-
-  clearBar() {
-    document.getElementById("progress-bar").innerHTML = " ";
   }
 }
