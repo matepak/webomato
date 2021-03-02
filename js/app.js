@@ -2,17 +2,29 @@ import { controlButton, stopButton } from "./variables.js";
 
 let pomodoroWorker = new Worker("./js/pomodoro_worker.js");
 
+function toggleControlButtonClass() {
+  if (controlButton.classList.contains("fa-play-circle")) {
+    controlButton.classList.replace("fa-play-circle", "fa-pause-circle");
+    return;
+  }
+
+  if (controlButton.classList.contains("fa-pause-circle")) {
+    controlButton.classList.replace("fa-pause-circle", "fa-play-circle");
+    return;
+  }
+}
+
 function controlButtonHandler() {
-  switch (controlButton.classList[1]) {
+  switch (controlButton.classList[0]) {
     case "fa-play-circle":
       clearBar();
+      toggleControlButtonClass();
       pomodoroWorker.postMessage("start");
-      controlButton.className = "far fa-pause-circle fa-5x";
       stopButton.style.display = "none";
       break;
     case "fa-pause-circle":
+      toggleControlButtonClass();
       pomodoroWorker.postMessage("pause");
-      controlButton.className = "far fa-play-circle fa-5x";
       stopButton.style.display = "inline";
       break;
   }
@@ -22,7 +34,7 @@ function stopButtonHandler() {
   playSound();
   pomodoroWorker.postMessage("stop");
   stopButton.style.display = "none";
-  controlButton.className = "far fa-play-circle fa-5x"
+  controlButton.classList.replace("fa-pause-circle", "fa-play-circle");
 }
 
 controlButton.addEventListener("click", () => {
