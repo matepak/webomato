@@ -1,40 +1,66 @@
-import { controlButton, stopButton } from "./variables.js";
+const pomodoroWorker = new Worker("./js/pomodoro_worker.js");
+const controlButton = document.getElementById("control-btn");
+const stopButton = document.getElementById("stop-btn");
+const playButton = "fa-play-circle";
+const pauseButton = "fa-pause-circle";
+const tomatoImage = `<img src="./favicon-32.png" alt="tomato">`;
+const pomodoroEndSound = "./ding.mp3";
 
-let pomodoroWorker = new Worker("./js/pomodoro_worker.js");
 
-function toggleControlButtonClass() {
-  if (controlButton.classList.contains("fa-play-circle")) {
-    controlButton.classList.replace("fa-play-circle", "fa-pause-circle");
+
+function toggleControlButton() {
+  if (controlButton.classList.contains(playButton)) {
+    controlButton.classList.replace(playButton, pauseButton);
     return;
   }
 
-  if (controlButton.classList.contains("fa-pause-circle")) {
-    controlButton.classList.replace("fa-pause-circle", "fa-play-circle");
+  if (controlButton.classList.contains(pauseButton)) {
+    controlButton.classList.replace(pauseButton, playButton);
     return;
   }
 }
 
 function controlButtonHandler() {
-  switch (controlButton.classList[0]) {
-    case "fa-play-circle":
+  const controlButtonClass = controlButton.classList[0];
+  switch (controlButtonClass) {
+    case playButton:
+      startTimer();
       clearBar();
-      toggleControlButtonClass();
-      pomodoroWorker.postMessage("start");
-      stopButton.style.display = "none";
+      toggleControlButton();
+      hideStopButton();
       break;
-    case "fa-pause-circle":
-      toggleControlButtonClass();
-      pomodoroWorker.postMessage("pause");
-      stopButton.style.display = "inline";
+    case pauseButton:
+      pauseTimer();
+      toggleControlButton();
+      showStopButton();
       break;
+  }
+
+  function showStopButton() {
+    stopButton.style.display = "inline";
+  }
+
+  function pauseTimer() {
+    pomodoroWorker.postMessage("pause");
+  }
+
+  function startTimer() {
+    pomodoroWorker.postMessage("start");
   }
 }
 
-function stopButtonHandler() {
-  playSound();
-  pomodoroWorker.postMessage("stop");
+function hideStopButton() {
   stopButton.style.display = "none";
-  controlButton.classList.replace("fa-pause-circle", "fa-play-circle");
+}
+
+function stopButtonHandler() {
+  stopTimer();
+  playSound();
+  hideStopButton();
+
+  function stopTimer() {
+    pomodoroWorker.postMessage("stop");
+  }
 }
 
 controlButton.addEventListener("click", () => {
@@ -46,7 +72,7 @@ stopButton.addEventListener("click", () => {
 });
 
 function playSound() {
-  let audio = new Audio("./ding.mp3");
+  const audio = new Audio(pomodoroEndSound);
   audio.play();
 }
 
@@ -58,10 +84,11 @@ pomodoroWorker.onmessage = function (message) {
     case "updateProgressBar":
       document.getElementById(
         "progress-bar"
-      ).innerHTML += `<img src="./favicon-32.png" alt="tomato">`;
+      ).innerHTML += tomatoImage;
       break;
     case "stopTimer":
       stopButtonHandler();
+      toggleControlButton();
       break;
   }
 };
