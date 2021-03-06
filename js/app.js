@@ -6,8 +6,6 @@ const pauseButton = "fa-pause-circle";
 const tomatoImage = `<img src="./favicon-32.png" alt="tomato">`;
 const pomodoroEndSound = "./ding.mp3";
 
-
-
 function toggleControlButton() {
   if (controlButton.classList.contains(playButton)) {
     controlButton.classList.replace(playButton, pauseButton);
@@ -79,7 +77,9 @@ function playSound() {
 pomodoroWorker.onmessage = function (message) {
   switch (message.data.action) {
     case "updateTimerElement":
-      document.getElementById("timer").innerText = message.data.actionData;
+      document.getElementById(
+        "timer"
+        ).innerText = message.data.actionData;
       break;
     case "updateProgressBar":
       document.getElementById(
@@ -94,5 +94,7 @@ pomodoroWorker.onmessage = function (message) {
 };
 
 function clearBar() {
-  document.getElementById("progress-bar").innerHTML = " ";
+  document.getElementById(
+    "progress-bar"
+    ).innerHTML = " ";
   }

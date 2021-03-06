@@ -1,6 +1,3 @@
-//'use strict';
-
-//import { Pomodoro } from "./pomodoro";
 importScripts('./pomodoro.js');
 
 let pomodoro = new Pomodoro();
