@@ -8,6 +8,7 @@ class Pomodoro {
     longBreakAfterInterval = 4
   ) {
     this.lastPomodoroRun = false;
+    this.isPaused = false;
     this.pomodoroTime = pomodoroTime;
     this.shortBreakTime = shortBreakTime;
     this.longBreakTime = longBreakTime;
@@ -39,7 +40,8 @@ class Pomodoro {
   }
 
   start() {
-    this.lastPomodoroRun = !this.lastPomodoroRun;
+    if(!this.isPaused) {this.lastPomodoroRun = !this.lastPomodoroRun;}
+    this.isPaused = false;
     this.intervalId = setInterval(() => {
       this.isRunning = this.timer.tick();
       if (!this.isRunning) {
@@ -53,11 +55,13 @@ class Pomodoro {
 
   stop() {
     this.nextTimer();
+    this.isPaused = false;
     clearInterval(this.intervalId);
     clearInterval(this.progressBarIntervalId);
   }
 
   pause() {
+    this.isPaused = true;
     clearInterval(this.intervalId);
     clearInterval(this.progressBarIntervalId);
   }

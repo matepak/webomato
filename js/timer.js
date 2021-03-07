@@ -23,7 +23,6 @@ function Timer(duration) {
     };
   
     this.getTimer = () => `${this.getMinutes()}:${this.getSeconds()}`;
-
     this.getMinutes = () => this.minutes.toString().padStart(2, 0);
     this.getSeconds = () => this.seconds.toString().padStart(2, 0);
   }
