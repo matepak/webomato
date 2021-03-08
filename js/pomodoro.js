@@ -2,8 +2,8 @@ importScripts("./timer.js");
 
 class Pomodoro {
   constructor(
-    pomodoroTime = 2,
-    shortBreakTime = 1,
+    pomodoroTime = 25,
+    shortBreakTime = 15,
     longBreakTime = 15,
     longBreakAfterInterval = 4
   ) {
