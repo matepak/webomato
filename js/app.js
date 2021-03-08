@@ -5,6 +5,7 @@ const playButton = "fa-play-circle";
 const pauseButton = "fa-pause-circle";
 const tomatoImage = `<img src="./favicon-32.png" alt="tomato">`;
 const pomodoroEndSound = "./ding.mp3";
+let isPaused = false;
 
 function toggleControlButton() {
   if (controlButton.classList.contains(playButton)) {
@@ -23,7 +24,9 @@ function controlButtonHandler() {
   switch (controlButtonClass) {
     case playButton:
       startTimer();
-      clearBar();
+      if(!isPaused) {
+        clearBar();
+      } else {isPaused = false;}
       toggleControlButton();
       hideStopButton();
       break;
@@ -39,6 +42,7 @@ function controlButtonHandler() {
   }
 
   function pauseTimer() {
+    isPaused = true;
     pomodoroWorker.postMessage("pause");
   }
 
@@ -52,6 +56,7 @@ function hideStopButton() {
 }
 
 function stopButtonHandler() {
+  isPaused = false;
   stopTimer();
   playSound();
   hideStopButton();
