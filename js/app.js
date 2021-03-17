@@ -5,6 +5,8 @@ const playButton = "fa-play-circle";
 const pauseButton = "fa-pause-circle";
 const tomatoImage = `<img src="./favicon-32.png" alt="tomato">`;
 const pomodoroEndSound = "./ding.mp3";
+
+let currentTask = {};
 let isPaused = false;
 
 function toggleControlButton() {

@@ -32,6 +32,13 @@ ul {
   background-color: salmon;
 }
 
+.task {
+  margin-top: 15px;
+  font-family: 'Roboto:wght@300', sans-serif;;
+  font-size: 25px;
+  color: white;
+}
+
 .far {
   color: white;
 }
@@ -69,11 +76,18 @@ ul {
   display: none;
 }
 
-.timer-base {
+.container-base {
   border-radius: 25px;
   width: 450px;
   height: 450px;
   background-color: salmon;
+}
+
+.task.container-base {
+  margin-top: 5px;
+  width: 450px;
+  height: 200px;
+  justify-content: flex-start;
 }
 
 .timer {
@@ -82,7 +96,7 @@ ul {
   color: white;
 }
 
-.progress-bar {
+.rounded-container {
   display: flex;
   align-items: center;
   justify-content:left;
