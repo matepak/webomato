@@ -1,5 +1,7 @@
+import {createTask} from "./tasks.js";
 const pomodoroWorker = new Worker("./js/pomodoro_worker.js");
 const controlButton = document.getElementById("control-btn");
+const taskField = document.getElementById("task-field");
 const stopButton = document.getElementById("stop-btn");
 const playButton = "fa-play-circle";
 const pauseButton = "fa-pause-circle";
@@ -8,6 +10,11 @@ const pomodoroEndSound = "./ding.mp3";
 
 let currentTask = {};
 let isPaused = false;
+
+(function init() {
+  currentTask = createTask("task");
+  taskField.innerText = currentTask.taskTitle;
+})();
 
 function toggleControlButton() {
   if (controlButton.classList.contains(playButton)) {
@@ -26,9 +33,11 @@ function controlButtonHandler() {
   switch (controlButtonClass) {
     case playButton:
       startTimer();
-      if(!isPaused) {
+      if (!isPaused) {
         clearBar();
-      } else {isPaused = false;}
+      } else {
+        isPaused = false;
+      }
       toggleControlButton();
       hideStopButton();
       break;
@@ -60,6 +69,7 @@ function hideStopButton() {
 function stopButtonHandler() {
   isPaused = false;
   stopTimer();
+  
   playSound();
   hideStopButton();
 
@@ -84,14 +94,10 @@ function playSound() {
 pomodoroWorker.onmessage = function (message) {
   switch (message.data.action) {
     case "updateTimerElement":
-      document.getElementById(
-        "timer"
-        ).innerText = message.data.actionData;
+      document.getElementById("timer").innerText = message.data.actionData;
       break;
     case "updateProgressBar":
-      document.getElementById(
-        "progress-bar"
-      ).innerHTML += tomatoImage;
+      document.getElementById("progress-bar").innerHTML += tomatoImage;
       break;
     case "stopTimer":
       stopButtonHandler();
@@ -101,7 +107,5 @@ pomodoroWorker.onmessage = function (message) {
 };
 
 function clearBar() {
-  document.getElementById(
-    "progress-bar"
-    ).innerHTML = " ";
-  }
+  document.getElementById("progress-bar").innerHTML = " ";
+}
