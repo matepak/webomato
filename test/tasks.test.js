@@ -1,5 +1,5 @@
 
-import {findTask, createTask} from '../js/tasks';
+import {findTask, createTask, addTask} from '../js/tasks';
 
 const taskList = [];
 
@@ -14,7 +14,13 @@ test('creates task object with given title', () => {
     expect(createTask("taskTitle").taskTitle).toBe("taskTitle");
 });
 
+test('adds task to the list', () => {
+    expect(addTask(taskList, createTask("testTask"))).toBe(1);
+
+});
+
 test('returns task when in the taskList', () => {
-    expect(findTask()).toBe(true);
+    addTask(taskList, createTask("testTask"));
+    expect(findTask(taskList, "testTask").taskTitle).toBe("testTask");
 });
 
