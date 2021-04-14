@@ -1,6 +1,8 @@
 export function createTask(taskTitle = "") {
   return {
     taskTitle: taskTitle,
+    taskDescription: "",
+    estimatedPomodoros: 0,
     duration: 0,
     pomodoroCount: 0,
     isFinished: false,
