@@ -2,8 +2,8 @@ importScripts('./pomodoro.js');
 
 let pomodoro = new Pomodoro();
 
-onmessage = function(e) {
-    switch (e.data) {
+onmessage = function(message) {
+    switch (message.data) {
     case 'start':
         pomodoro.start();
         break;
@@ -15,3 +15,5 @@ onmessage = function(e) {
         break;
     }
 }
+
+
