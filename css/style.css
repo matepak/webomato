@@ -5,7 +5,38 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: #ff471a;
+  background-color: tomato;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: tomato;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: salmon;
+}
+
+.task {
+  margin-top: 15px;
+  font-family: 'Roboto:wght@300', sans-serif;;
+  font-size: 25px;
+  color: white;
 }
 
 .far {
@@ -45,11 +76,18 @@ body {
   display: none;
 }
 
-.timer-base {
+.container-base {
   border-radius: 25px;
   width: 450px;
   height: 450px;
   background-color: salmon;
+}
+
+.task.container-base {
+  margin-top: 5px;
+  width: 450px;
+  height: 200px;
+  justify-content: flex-start;
 }
 
 .timer {
@@ -58,7 +96,7 @@ body {
   color: white;
 }
 
-.progress-bar {
+.rounded-container {
   display: flex;
   align-items: center;
   justify-content:left;
