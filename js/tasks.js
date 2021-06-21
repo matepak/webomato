@@ -1,30 +1,44 @@
-export function createTask(taskTitle = "") {
+function createTask(taskTitle = "", taskDescription = "") {
   return {
     taskTitle: taskTitle,
-    taskDescription: "",
-    estimatedPomodoros: 0,
+    taskDescription: taskDescription,
+    targetPomodoroCount: 0,
+    actualPomodoroCount: 0,
     duration: 0,
-    pomodoroCount: 0,
     isFinished: false,
+
     addPomodoro: function () {
       this.pomodoroCount++;
+    },
+    finishPomodoro: function () {
+      this.isFinished = true;
     },
   };
 }
 
-export function addTask(taskList, task) {
-  taskList.push(task);
+export const Task = function () {
+  this.taskList = [];
+};
+
+Task.prototype.addTask = addTask;
+Task.prototype.findTaskByTitle = findTaskByTitle;
+Task.prototype.removeTaskByTitle = removeTaskByTitle;
+Task.prototype.findTaskIndex = findTaskIndex;
+Task.createTask = createTask;
+
+function addTask(task) {
+  this.taskList.push(task);
 }
 
-export function removeGivenTask(taskList, taskTitle) {
-  let index = findTaskIndex(taskList, taskTitle);
-  taskList.splice(--index, 1);
+function removeTaskByTitle(taskTitle) {
+  let index = this.findTaskIndex(taskTitle);
+  this.taskList.splice(--index, 1);
 }
 
-export function findTask(taskList, taskTitle) {
-  return taskList.find(task => task.taskTitle === taskTitle);
+function findTaskByTitle(taskTitle) {
+  return this.taskList.find((task) => task.taskTitle === taskTitle);
 }
 
-export function findTaskIndex(taskList, taskTitle) {
-  return taskList.findIndex(task => task.taskTitle === taskTitle);
+function findTaskIndex(taskTitle) {
+  return this.taskList.findIndex((task) => task.taskTitle === taskTitle);
 }
