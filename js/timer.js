@@ -1,5 +1,5 @@
 
-function Timer(duration) {
+export function Timer(duration) {
     this.minutes = duration;
     this.seconds = 0;
   
