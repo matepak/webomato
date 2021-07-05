@@ -1,9 +1,11 @@
 
-function Timer(duration) {
+class Timer {
+    constructor(duration) {
     this.minutes = duration;
     this.seconds = 0;
+    }
   
-    this.tick = function () {
+    tick() {
       if (this.minutes === 0 && this.seconds === 0) {
         return false;
       }
@@ -17,15 +19,15 @@ function Timer(duration) {
       return true;
     };
   
-    this.reset = () => {
+    reset() {
       this.minutes = 0;
       this.seconds = 0;
     };
   
-    this.getTimer = () => `${this.getMinutes()}:${this.getSeconds()}`;
-    this.getMinutes = () => this.minutes.toString().padStart(2, 0);
-    this.getSeconds = () => this.seconds.toString().padStart(2, 0);
-    this.getMiliSeconds = () => (this.seconds * 1000) + (this.minutes * 60 * 1000);
+    getTimer = () => `${this.getMinutes()}:${this.getSeconds()}`;
+    getMinutes = () => this.minutes.toString().padStart(2, 0);
+    getSeconds = () => this.seconds.toString().padStart(2, 0);
+    getMiliSeconds = () => (this.seconds * 1000) + (this.minutes * 60 * 1000);
   };
 
   export function stopWatch(duration) {
