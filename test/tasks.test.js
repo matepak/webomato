@@ -1,4 +1,4 @@
-import { Task } from "../js/tasks";
+import Task from "../js/tasks";
 describe("Task module", function () {
   describe("Task.createTask()", function () {
     it("When no arguments passed, should return uninitialized task", () => {
