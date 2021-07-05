@@ -3,19 +3,19 @@ class Task {
     this.taskList = [];
   }
 
-  static createTask(taskTitle = "", taskDescription = "") {
+  static createTask(taskTitle = '', taskDescription = '') {
     return {
-      taskTitle: taskTitle,
-      taskDescription: taskDescription,
+      taskTitle,
+      taskDescription,
       targetPomodoroCount: 0,
       actualPomodoroCount: 0,
       duration: 0,
       isFinished: false,
 
-      addPomodoro: function () {
-        this.pomodoroCount++;
+      addPomodoro() {
+        this.pomodoroCount += 1;
       },
-      finishPomodoro: function () {
+      finishPomodoro() {
         this.isFinished = true;
       },
     };
@@ -35,7 +35,7 @@ class Task {
 
   removeTaskByTitle(taskTitle) {
     let index = this.findTaskIndex(taskTitle);
-    this.taskList.splice(--index, 1);
+    this.taskList.splice(index -= 1, 1);
   }
 }
 

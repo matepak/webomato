@@ -1,142 +1,118 @@
-import Task from "../js/tasks";
-describe("Task module", function () {
-  describe("Task.createTask()", function () {
-    it("When no arguments passed, should return uninitialized task", () => {
-      //Arrange
-      let uninitializedTask = {
-        taskTitle: "",
-        taskDescription: "",
+import Task from '../js/tasks';
+
+describe('Task module', () => {
+  describe('Task.createTask()', () => {
+    it('When no arguments passed, should return uninitialized task', () => {
+      const uninitializedTask = {
+        taskTitle: '',
+        taskDescription: '',
         targetPomodoroCount: 0,
         actualPomodoroCount: 0,
         duration: 0,
         isFinished: false,
 
-        addPomodoro: function () {
-          this.pomodoroCount++;
+        addPomodoro() {
+          this.pomodoroCount += 1;
         },
-        finishPomodoro: function () {
+        finishPomodoro() {
           this.isFinished = true;
         },
       };
 
-      //Act
-      let createdTask = Task.createTask();
-
-      //Assert
+      const createdTask = Task.createTask();
       expect(JSON.stringify(createdTask)).toStrictEqual(
-        JSON.stringify(uninitializedTask)
+        JSON.stringify(uninitializedTask),
       );
     });
 
-    it("When title and decription passed, returns task with given title and description", () => {
-      //Arrange
-      let initializedTask = {
-        taskTitle: "taskTitle",
-        taskDescription: "taskDescription",
+    it('When title and decription passed, returns task with given title and description', () => {
+      const initializedTask = {
+        taskTitle: 'taskTitle',
+        taskDescription: 'taskDescription',
         targetPomodoroCount: 0,
         actualPomodoroCount: 0,
         duration: 0,
         isFinished: false,
 
-        addPomodoro: function () {
-          this.pomodoroCount++;
+        addPomodoro() {
+          this.pomodoroCount += 1;
         },
-        finishPomodoro: function () {
+        finishPomodoro() {
           this.isFinished = true;
         },
       };
 
-      //Act
-      let task = Task.createTask("taskTitle", "taskDescription");
-
-      //Assert
+      const task = Task.createTask('taskTitle', 'taskDescription');
       expect(JSON.stringify(task)).toStrictEqual(
-        JSON.stringify(initializedTask)
+        JSON.stringify(initializedTask),
       );
     });
   });
 
-  describe("Task handlingg", () => {
-    describe("addTask()", () => {
-      it("should add one task to the taskList", () => {
-        //Arrange
-        let pomodoros = new Task();
-        let testTask = Task.createTask("testTask");
-
-        //Act
+  describe('Task handlingg', () => {
+    describe('addTask()', () => {
+      it('should add one task to the taskList', () => {
+        const pomodoros = new Task();
+        const testTask = Task.createTask('testTask');
         pomodoros.addTask(testTask);
-
-        //Assert
         expect(pomodoros.taskList.length).toEqual(1);
-        expect(pomodoros.findTaskByTitle("testTask").taskTitle).toEqual(
-          "testTask"
+        expect(pomodoros.findTaskByTitle('testTask').taskTitle).toEqual(
+          'testTask',
         );
       });
     });
 
-    describe("findTaskIndex()", () => {
-      it("should return task index on the taskList", () => {
-        //Arrange
-        let pomodoros = new Task();
-        let firstTestTask = Task.createTask("firstTestTask");
-        let secondTestTask = Task.createTask("secondTestTask");
+    describe('findTaskIndex()', () => {
+      it('should return task index on the taskList', () => {
+        const pomodoros = new Task();
+        const firstTestTask = Task.createTask('firstTestTask');
+        const secondTestTask = Task.createTask('secondTestTask');
 
-        //Act
         pomodoros.addTask(firstTestTask);
         pomodoros.addTask(secondTestTask);
 
-        //Assert
-        expect(pomodoros.findTaskIndex("firstTestTask")).toBe(0);
-        expect(pomodoros.findTaskIndex("secondTestTask")).toBe(1);
-        expect(pomodoros.findTaskIndex("thirdTestTask")).toBe(-1); //exclude to own test
+        expect(pomodoros.findTaskIndex('firstTestTask')).toBe(0);
+        expect(pomodoros.findTaskIndex('secondTestTask')).toBe(1);
+        expect(pomodoros.findTaskIndex('thirdTestTask')).toBe(-1); // exclude to own test
       });
 
       it("should return -1 when task isn't on the list", () => {
-        let pomodoros = new Task();
+        const pomodoros = new Task();
 
-        expect(pomodoros.findTaskIndex("firstTestTask")).toBe(-1);
+        expect(pomodoros.findTaskIndex('firstTestTask')).toBe(-1);
       });
     });
 
-    describe("findTaskByTitle()", () => {
-      it("should find and return task by given title", () => {
-        //Arrange
-        let pomodoros = new Task();
-        let testTask = Task.createTask("firstTestTask");
+    describe('findTaskByTitle()', () => {
+      it('should find and return task by given title', () => {
+        const pomodoros = new Task();
+        const testTask = Task.createTask('firstTestTask');
         pomodoros.addTask(testTask);
 
-        //Act
-        let returnedTask = pomodoros.findTaskByTitle("firstTestTask");
+        const returnedTask = pomodoros.findTaskByTitle('firstTestTask');
 
-        //Assert
-        expect(returnedTask.taskTitle).toEqual("firstTestTask");
+        expect(returnedTask.taskTitle).toEqual('firstTestTask');
       });
 
-      it("should return undefined when given task was not found", () => {
-        //Arrange
-        let pomodoros = new Task();
+      it('should return undefined when given task was not found', () => {
+        const pomodoros = new Task();
 
-        //Act
-        let returnedTask = pomodoros.findTaskByTitle("firstTestTask");
+        const returnedTask = pomodoros.findTaskByTitle('firstTestTask');
 
-        //Assert
         expect(returnedTask).toEqual(undefined);
       });
     });
   });
 
-  describe("removeTaskByTitle()", () => {
-    it("should remove task by given title", () => {
-      //Arrange
-      let pomodoros = new Task();
-      let testTask = Task.createTask("firstTestTask");
+  describe('removeTaskByTitle()', () => {
+    it('should remove task by given title', () => {
+      const pomodoros = new Task();
+      const testTask = Task.createTask('firstTestTask');
       pomodoros.addTask(testTask);
 
-      //Act
-      pomodoros.removeTaskByTitle("firstTestTask");
+      pomodoros.removeTaskByTitle('firstTestTask');
 
-      //Assert
-      expect(pomodoros.findTaskByTitle("firstTestTask")).toBe(undefined);
+      expect(pomodoros.findTaskByTitle('firstTestTask')).toBe(undefined);
     });
   });
 });

@@ -1,3 +1,5 @@
 {
-	"jest.jestCommandLine": "/home/mateusz/node_modules/jest/bin/jest"
+	"jest.jestCommandLine": "/home/mateusz/node_modules/jest/bin/jest",
+	"prettier.singleQuote": true,
+	"prettier.trailingComma": "all"
 }
