@@ -1,4 +1,4 @@
-import Task from './tasks';
+import Task from './tasks.js';
 
 const pomodoroWorker = new Worker('./js/pomodoro_worker.js');
 const controlButton = document.getElementById('control-btn');
