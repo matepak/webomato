@@ -1,20 +1,21 @@
-import {Task} from "./tasks.js";
-const pomodoroWorker = new Worker("./js/pomodoro_worker.js");
-const controlButton = document.getElementById("control-btn");
-const taskField = document.getElementById("task-field");
-const stopButton = document.getElementById("stop-btn");
-const playButton = "fa-play-circle";
-const pauseButton = "fa-pause-circle";
-const tomatoImage = `<img src="./favicon-32.png" alt="tomato">`;
-const pomodoroEndSound = "./ding.mp3";
+import Task from './tasks';
+
+const pomodoroWorker = new Worker('./js/pomodoro_worker.js');
+const controlButton = document.getElementById('control-btn');
+const taskField = document.getElementById('task-field');
+const stopButton = document.getElementById('stop-btn');
+const playButton = 'fa-play-circle';
+const pauseButton = 'fa-pause-circle';
+const tomatoImage = '<img src="./favicon-32.png" alt="tomato">';
+const pomodoroEndSound = './ding.mp3';
 
 let currentTask = {};
 let isPaused = false;
 
 (function init() {
-  currentTask = Task.createTask("task");
+  currentTask = Task.createTask('task');
   taskField.innerText = currentTask.taskTitle;
-})();
+}());
 
 function toggleControlButton() {
   if (controlButton.classList.contains(playButton)) {
@@ -24,10 +25,28 @@ function toggleControlButton() {
 
   if (controlButton.classList.contains(pauseButton)) {
     controlButton.classList.replace(pauseButton, playButton);
-    return;
   }
 }
+function showStopButton() {
+  stopButton.style.display = 'inline';
+}
 
+function pauseTimer() {
+  isPaused = true;
+  pomodoroWorker.postMessage('pause');
+}
+
+function startTimer() {
+  pomodoroWorker.postMessage('start');
+}
+
+function clearBar() {
+  document.getElementById('progress-bar').innerHTML = ' ';
+}
+
+function hideStopButton() {
+  stopButton.style.display = 'none';
+}
 function controlButtonHandler() {
   const controlButtonClass = controlButton.classList[0];
   switch (controlButtonClass) {
@@ -46,66 +65,46 @@ function controlButtonHandler() {
       toggleControlButton();
       showStopButton();
       break;
-  }
-
-  function showStopButton() {
-    stopButton.style.display = "inline";
-  }
-
-  function pauseTimer() {
-    isPaused = true;
-    pomodoroWorker.postMessage("pause");
-  }
-
-  function startTimer() {
-    pomodoroWorker.postMessage("start");
+    default:
   }
 }
 
-function hideStopButton() {
-  stopButton.style.display = "none";
+function stopTimer() {
+  pomodoroWorker.postMessage('stop');
 }
-
-function stopButtonHandler() {
-  isPaused = false;
-  stopTimer();
-  
-  playSound();
-  hideStopButton();
-
-  function stopTimer() {
-    pomodoroWorker.postMessage("stop");
-  }
-}
-
-controlButton.addEventListener("click", () => {
-  controlButtonHandler();
-});
-
-stopButton.addEventListener("click", () => {
-  stopButtonHandler();
-});
 
 function playSound() {
   const audio = new Audio(pomodoroEndSound);
   audio.play();
 }
 
-pomodoroWorker.onmessage = function (message) {
+function stopButtonHandler() {
+  isPaused = false;
+  stopTimer();
+  playSound();
+  hideStopButton();
+}
+
+controlButton.addEventListener('click', () => {
+  controlButtonHandler();
+});
+
+stopButton.addEventListener('click', () => {
+  stopButtonHandler();
+});
+
+pomodoroWorker.onmessage = (message) => {
   switch (message.data.action) {
-    case "updateTimerElement":
-      document.getElementById("timer").innerText = message.data.actionData;
+    case 'updateTimerElement':
+      document.getElementById('timer').innerText = message.data.actionData;
       break;
-    case "updateProgressBar":
-      document.getElementById("progress-bar").innerHTML += tomatoImage;
+    case 'updateProgressBar':
+      document.getElementById('progress-bar').innerHTML += tomatoImage;
       break;
-    case "stopTimer":
+    case 'stopTimer':
       stopButtonHandler();
       toggleControlButton();
       break;
+    default:
   }
 };
-
-function clearBar() {
-  document.getElementById("progress-bar").innerHTML = " ";
-}

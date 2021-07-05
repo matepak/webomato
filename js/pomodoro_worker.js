@@ -1,19 +1,18 @@
 importScripts('./pomodoro.js');
 
-let pomodoro = new Pomodoro();
+const pomodoro = new Pomodoro();
 
-onmessage = function(message) {
-    switch (message.data) {
+onmessage = (message) => {
+  switch (message.data) {
     case 'start':
-        pomodoro.start();
-        break;
+      pomodoro.start();
+      break;
     case 'pause':
-        pomodoro.pause();
-        break;
+      pomodoro.pause();
+      break;
     case 'stop':
-        pomodoro.stop();
-        break;
-    }
-}
-
-
+      pomodoro.stop();
+      break;
+    default:
+  }
+};
