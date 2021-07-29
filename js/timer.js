@@ -1,4 +1,3 @@
-
 class Timer {
     constructor(duration) {
     this.minutes = duration;
@@ -30,6 +29,4 @@ class Timer {
     getMiliSeconds = () => (this.seconds * 1000) + (this.minutes * 60 * 1000);
   };
 
-  // export function stopWatch(duration) {
-  //   return new Timer(duration)
-  // };
+  //export default Timer;

@@ -13,7 +13,7 @@ class Pomodoro {
     this.shortBreakTime = shortBreakTime;
     this.longBreakTime = longBreakTime;
     this.longBreakAfterInterval = longBreakAfterInterval;
-    this.shortBreakesLeft = longBreakAfterInterval;
+    this.shortBrakesLeft = longBreakAfterInterval;
     this.currentBreakTime = shortBreakTime;
     this.timer = new Timer(pomodoroTime);
     this.progressBarCount = 0;
@@ -29,7 +29,7 @@ class Pomodoro {
     },
 
     clearProgressBar: function () {
-      return { action: "clearProogressBar", actionData: null };
+      return { action: "clearProgressBar", actionData: null };
     },
     stopTimer: function () {
       return { action: "stopTimer", actionData: null };
@@ -76,8 +76,8 @@ class Pomodoro {
 
   breakHandler() {
     if (!this.lastPomodoroRun) return this.pomodoroTime;
-    if (this.lastPomodoroRun) this.shortBreakesLeft -= 1;
-    if (this.shortBreakesLeft === 0) {
+    if (this.lastPomodoroRun) this.shortBrakesLeft -= 1;
+    if (this.shortBrakesLeft === 0) {
       return this.longBreakTime;
     } else {
       return this.shortBreakTime;

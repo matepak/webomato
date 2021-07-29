@@ -1,12 +1,11 @@
-import {stopWatch} from  "../js/timer";
-describe("Timer module", function(){
-    it("should return \"59\"", () =>{
-        let watch = stopWatch(10);
+require('../js/timer');
 
-        watch.tick();
+describe('Timer module', () => {
+  it('should return "59"', () => {
+    const watch = Timer(10);
 
-        expect(watch.getSeconds()).toEqual("59");
-    });
+    watch.tick();
 
-
+    expect(watch.getSeconds()).toEqual('59');
+  });
 });
