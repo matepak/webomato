@@ -1,32 +1,3 @@
-// class Timer {
-//     constructor(duration) {
-//     this.minutes = duration;
-//     this.seconds = 0;
-//     }
-//     tick() {
-//       if (this.minutes === 0 && this.seconds === 0) {
-//         return false;
-//       }
-//       if (this.seconds === 0 && this.minutes > 0) {
-//         this.seconds = 59;
-//         this.minutes--;
-//         return true;
-//       }
-//       this.seconds--;
-//       return true;
-//     };
-//     reset() {
-//       this.minutes = 0;
-//       this.seconds = 0;
-//     };
-//     getTimer = () => `${this.getMinutes()}:${this.getSeconds()}`;
-//     getMinutes = () => this.minutes.toString().padStart(2, 0);
-//     getSeconds = () => this.seconds.toString().padStart(2, 0);
-//     getMiliSeconds = () => (this.seconds * 1000) + (this.minutes * 60 * 1000);
-//   };
-
-//   //export default Timer;
-
 function minutesToMilliseconds(minutes) {
   return minutes * 60000;
 }
@@ -34,31 +5,32 @@ function minutesToMilliseconds(minutes) {
 function millisecondsToSeconds(milliseconds) {
   return Math.floor(milliseconds / 1000);
 }
-
+// eslint-disable-next-line no-unused-vars
 class Timer {
   constructor(duration = 1) {
     this.isPaused = false;
     this.duration = minutesToMilliseconds(duration);
+    this.difference = 0;
     this.pauseOffset = 0;
   }
 
   tick() {
     if (this.isPaused) return;
-    if (!this.startTime) this.startTime = parseInt(Date.now(), 10);
+    if (!this.startedAt) this.startedAt = parseInt(Date.now(), 10);
     this.now = parseInt(Date.now(), 10) - this.pauseOffset;
-    this.difference = this.now - this.startTime;
+    this.difference = this.now - this.startedAt;
   }
 
   pause() {
     if (this.isPaused) return;
     this.isPaused = true;
-    this.pausedTime = this.now;
+    this.pausedAt = this.now;
   }
 
   start() {
     if (!this.isPaused) return;
     this.isPaused = false;
-    this.pauseOffset = Date.now() - this.pausedTime;
+    this.pauseOffset = Date.now() - this.pausedAt;
   }
 
   reset() {
@@ -66,7 +38,7 @@ class Timer {
     this.now = 0;
     this.difference = 0;
     this.pauseOffset = 0;
-    this.startTime = null;
+    this.startedAt = null;
   }
 
   isFinished() {
@@ -92,5 +64,3 @@ class Timer {
     )}`;
   }
 }
-
-export default Timer;
