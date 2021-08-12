@@ -2,7 +2,7 @@ importScripts("./timer.js");
 
 class Pomodoro {
   constructor(
-    pomodoroTime = 25,
+    pomodoroTime = 1,
     shortBreakTime = 5,
     longBreakTime = 15,
     longBreakAfterInterval = 4
@@ -89,8 +89,9 @@ class Pomodoro {
 
   progressBar() {
     let duration = this.timer.duration;
-    //if (duration < 1) duration = 1;
-    this.progressBarInterval = duration / (10 - this.progressBarCount);
+    if (duration < 1) duration = 1;
+    this.progressBarInterval = duration / (11 - this.progressBarCount);
+    console.log(duration);
 
     this.progressBarIntervalId = setInterval(() => {
       postMessage(this.actionObject.updateProgressBar());
