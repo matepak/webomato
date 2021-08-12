@@ -48,6 +48,7 @@ function clearBar() {
 function hideStopButton() {
   stopButton.style.display = 'none';
 }
+
 function controlButtonHandler() {
   const controlButtonClass = controlButton.classList[0];
   switch (controlButtonClass) {

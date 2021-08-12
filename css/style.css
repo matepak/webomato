@@ -49,7 +49,6 @@ ul {
   list-style: none;
 
   flex-direction: column;
-  justify-content: top;
   align-items: center;
 
   -ms-box-orient: horizontal;
@@ -77,8 +76,8 @@ ul {
 }
 
 .container-base {
-  width: 450px;
-  height: 450px;
+  width: 25em;
+  height: 25em;
   position: relative;
   justify-content: center;
   background-color:#CD6155;
@@ -123,4 +122,13 @@ hr {
   top: 0;
   overflow: hidden;
   width: 100%;
+}
+
+.settings {
+  padding-top: 20px;
+}
+
+.app-container {
+  display: flex;
+  justify-content: space-evenly;
 }

@@ -45,6 +45,7 @@
       </ul>
     </div>
     <br>
+    <div class = "app-container flex-container">
       <div class="flex-container container-base">
         <div class="timer" id="timer"></div>
         <div class="button-row">
@@ -53,12 +54,16 @@
         </div>
         <div id="progress-bar" class="rounded-container"></div>
       </div>
-      <!-- <div id="task" class="flex-container task container-base">
-        <div class="rounded-container task" id="task-field">
-          task-placeholder
-        </div> -->
+      <div class = " flex-container container-settings container-base">
+        <p>Pomodoro time</p>
+        <input id="pomodoro-time" type="number" min="0" step="1" value = "25">
+        <p>Short Break</p>
+        <input id="short-break-time" type="number" min="0" step="1" value = "5">
+        <p>Long Break</p>
+        <input id = "long-break-time" type="number" min="0" step="1" value ="15">
       </div>
-    </div>
+      </div>
+      </div>
     <script type="module" src="./js/app.js"></script>
   </body>
 </html>

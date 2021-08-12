@@ -42,23 +42,23 @@ class Timer {
   }
 
   isFinished() {
-    return this.getMinutes() === '0' && this.getSeconds() === '0';
+    return (this.getMinutes() <= 0 && this.getSeconds() <= 0);
   }
 
   getSeconds() {
     return (
       millisecondsToSeconds(this.duration - this.difference) % 60
-    ).toString();
+    );
   }
 
   getMinutes() {
     return Math.floor(
       millisecondsToSeconds(this.duration - this.difference) / 60,
-    ).toString();
+    );
   }
 
   getTimer() {
-    return `${this.getMinutes().padStart(2, '0')}:${this.getSeconds().padStart(
+    return `${this.getMinutes().toString().padStart(2, '0')}:${this.getSeconds().toString().padStart(
       2,
       '0',
     )}`;

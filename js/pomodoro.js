@@ -3,7 +3,7 @@ importScripts("./timer.js");
 class Pomodoro {
   constructor(
     pomodoroTime = 1,
-    shortBreakTime = 5,
+    shortBreakTime = 1,
     longBreakTime = 15,
     longBreakAfterInterval = 4
   ) {
@@ -45,8 +45,7 @@ class Pomodoro {
     this.isPaused = false;
     this.timer.start();
     this.intervalId = setInterval(() => {
-      this.isRunning = !this.timer.isFinished();
-      if (!this.isRunning) {
+      if (this.timer.isFinished()) {
         postMessage(this.actionObject.stopTimer());
       }
       this.timer.tick();
@@ -62,6 +61,7 @@ class Pomodoro {
     this.progressBarCount = 0;
     clearInterval(this.intervalId);
     clearInterval(this.progressBarIntervalId);
+    this.timer.reset();
   }
 
   pause() {
