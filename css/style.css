@@ -79,6 +79,7 @@ ul {
 .container-base {
   width: 450px;
   height: 450px;
+  position: relative;
   justify-content: center;
   background-color:#CD6155;
 }
@@ -116,4 +117,10 @@ ul {
 
 hr {
 	border-top: 2px dashed #8c8b8b;
+}
+
+.navigation {
+  top: 0;
+  overflow: hidden;
+  width: 100%;
 }
