@@ -5,7 +5,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  background-color: tomato;
+  background-color: #9c443c;
 }
 
 li {
@@ -21,7 +21,7 @@ li a {
 }
 
 li a:hover {
-  background-color: tomato;
+  background-color: #C0392B;
 }
 
 ul {
@@ -29,7 +29,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: salmon;
+  background-color: #CD6155;
 }
 
 .task {
@@ -49,7 +49,7 @@ ul {
   list-style: none;
 
   flex-direction: column;
-  justify-content: center;
+  justify-content: top;
   align-items: center;
 
   -ms-box-orient: horizontal;
@@ -77,10 +77,10 @@ ul {
 }
 
 .container-base {
-  border-radius: 25px;
   width: 450px;
   height: 450px;
-  background-color: salmon;
+  justify-content: center;
+  background-color:#CD6155;
 }
 
 .task.container-base {
@@ -92,7 +92,7 @@ ul {
 
 .timer {
   font-size: 100px;
-  font-family: "Space Mono", monospace;
+  font-family:  'Rubik', sans-serif;;
   color: white;
 }
 
@@ -101,7 +101,7 @@ ul {
   align-items: center;
   justify-content:left;
   padding-left: 5px;
-  border: 2px solid whitesmoke;
+  border: 2px solid rgba(245, 245, 245, 0.185);
   border-radius: 25px;
   min-height: 40px;
   width: 330px;
@@ -112,4 +112,8 @@ ul {
   font-family: "Press Start 2P", cursive;
   font-size: 50px;
   color: wheat;
+}
+
+hr {
+	border-top: 2px dashed #8c8b8b;
 }
