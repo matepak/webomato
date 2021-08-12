@@ -13,10 +13,10 @@ const pomodoroEndSound = './ding.mp3';
 let currentTask = {};
 let isPaused = false;
 
-(function init() {
-  currentTask = Task.createTask('task_place_holder');
-  taskField.innerText = currentTask.taskTitle;
-}());
+// (function init() {
+//   currentTask = Task.createTask('task_place_holder');
+//   taskField.innerText = currentTask.taskTitle;
+// }());
 
 function toggleControlButton() {
   if (controlButton.classList.contains(playButton)) {
