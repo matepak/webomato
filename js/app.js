@@ -1,6 +1,7 @@
 import Task from './tasks.js';
 
 const pomodoroWorker = new Worker('./js/pomodoro_worker.js');
+
 const controlButton = document.getElementById('control-btn');
 const taskField = document.getElementById('task-field');
 const stopButton = document.getElementById('stop-btn');
@@ -13,7 +14,7 @@ let currentTask = {};
 let isPaused = false;
 
 (function init() {
-  currentTask = Task.createTask('task');
+  currentTask = Task.createTask('task_place_holder');
   taskField.innerText = currentTask.taskTitle;
 }());
 

@@ -43,6 +43,7 @@ class Pomodoro {
   start() {
     if(!this.isPaused) {this.lastPomodoroRun = !this.lastPomodoroRun;}
     this.isPaused = false;
+    this.timer.start();
     this.intervalId = setInterval(() => {
       this.isRunning = !this.timer.isFinished();
       if (!this.isRunning) {
@@ -64,6 +65,7 @@ class Pomodoro {
   }
 
   pause() {
+    this.timer.pause();
     this.isPaused = true;
     clearInterval(this.intervalId);
     clearInterval(this.progressBarIntervalId);
@@ -88,7 +90,6 @@ class Pomodoro {
   progressBar() {
     let duration = this.timer.duration;
     //if (duration < 1) duration = 1;
-    postMessage(this.actionObject.updateProgressBar());
     this.progressBarInterval = duration / (10 - this.progressBarCount);
 
     this.progressBarIntervalId = setInterval(() => {
