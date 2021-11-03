@@ -15,6 +15,7 @@ const sunDarkModeButton = 'fa-sun';
 const tomatoImage = '<img src="./favicon-32.png" alt="tomato">';
 const pomodoroEndSound = './ding.mp3';
 
+let isIndarkMode = false;
 let currentTask = {};
 let isPaused = false;
 
@@ -38,11 +39,24 @@ function classTogler(element, firstClass, secondClass) {
 }
 
 function darkMode() {
+  document.querySelector('ul')
+  .classList.add('dark-mode');
   document.querySelector('.flex-container')
   .classList.add('dark-mode');
-  document.querySelector('.flex-container.container-base')
+  document.querySelector('.base-container')
   .classList.add('dark-mode');
   }
+
+function lightMode() {
+  document.querySelector('ul')
+  .classList.remove('dark-mode');
+  document.querySelector('.flex-container')
+  .classList.remove('dark-mode');
+  document.querySelector('.base-container')
+  .classList.remove('dark-mode');
+  }
+
+
 
 const toggleControlButton = classTogler(controlButton, playButton, pauseButton);
 const toggleDarkModeButton = classTogler(darkModeButton, moonDarkModeButton, sunDarkModeButton);
@@ -116,7 +130,16 @@ stopButton.addEventListener('click', () => {
 
 darkModeButton.addEventListener('click', () => {
   toggleDarkModeButton();
-  darkMode();
+  if(!isIndarkMode) {
+    darkMode();
+    isIndarkMode = true;
+    return;
+  }
+  if(isIndarkMode) {
+    lightMode();
+    isIndarkMode = false;
+    return;
+  }
 });
 
 pomodoroWorker.onmessage = (message) => {

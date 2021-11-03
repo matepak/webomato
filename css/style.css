@@ -31,11 +31,8 @@ li:hover {
 }
 
 .navigation {
-  /* top: 0; */
-  /* overflow: hidden; */
   width: 100%;
   text-align: center;
-  
 }
 
 .task {
@@ -81,15 +78,14 @@ li:hover {
   font-size: 100px;
   font-family: 'Rubik', sans-serif;;
   color: white;
-  /* margin: auto; */
 }
 
 #stop-btn {
   display: none;
 }
 
-.container-base.dark-mode { 
-  background-color:#403f3f;
+.base-container.dark-mode { 
+background-color:#403f3f;
 }
 
 .task.container-base {
@@ -110,8 +106,6 @@ hr {
 	border-top: 2px dashed #8c8b8b;
 }
 
-
-
 .container-settings-visible {
   visibility: visible;
 }
@@ -124,15 +118,10 @@ hr {
   background-color: black;
 }
 
-body.dark-mode ul {
+ul.dark-mode {
   background-color: #403f3f;
 }
 
-body.dark-mode li a:hover {
+ul.dark-mode li:hover {
   background-color: #1f1e1e;
-}
-
-.light-mode {
-  background-color: #9c443c;
-  color: white;
 }
