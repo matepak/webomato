@@ -3,10 +3,15 @@ import Task from './tasks.js';
 const pomodoroWorker = new Worker('./js/pomodoro_worker.js');
 
 const controlButton = document.getElementById('control-btn');
+const settingsButton = document.getElementById('settings');
+const settingsContainer = document.getElementById('settings-container');
+const darkModeButton = document.getElementById('dark-mode');
 const taskField = document.getElementById('task-field');
 const stopButton = document.getElementById('stop-btn');
 const playButton = 'fa-play-circle';
 const pauseButton = 'fa-pause-circle';
+const moonDarkModeButton = 'fa-moon';
+const sunDarkModeButton = 'fa-sun';
 const tomatoImage = '<img src="./favicon-32.png" alt="tomato">';
 const pomodoroEndSound = './ding.mp3';
 
@@ -18,16 +23,24 @@ let isPaused = false;
 //   taskField.innerText = currentTask.taskTitle;
 // }());
 
-function toggleControlButton() {
-  if (controlButton.classList.contains(playButton)) {
-    controlButton.classList.replace(playButton, pauseButton);
-    return;
-  }
+function classTogler(element, firstClass, secondClass) {
+  return () => {
+    if (element.classList.contains(firstClass)) {
+      element.classList.replace(firstClass, secondClass);
+      return;
+    }
 
-  if (controlButton.classList.contains(pauseButton)) {
-    controlButton.classList.replace(pauseButton, playButton);
-  }
+    if (element.classList.contains(secondClass)) {
+      element.classList.replace(secondClass, firstClass);
+      return;
+    }
+    console.log('nothing');
+  };
 }
+
+const toggleControlButton = classTogler(controlButton, playButton, pauseButton);
+const toggleDarkModeButton = classTogler(darkModeButton, moonDarkModeButton, sunDarkModeButton);
+
 function showStopButton() {
   stopButton.style.display = 'inline';
 }
@@ -93,6 +106,10 @@ controlButton.addEventListener('click', () => {
 
 stopButton.addEventListener('click', () => {
   stopButtonHandler();
+});
+
+darkModeButton.addEventListener('click', () => {
+  toggleDarkModeButton();
 });
 
 pomodoroWorker.onmessage = (message) => {

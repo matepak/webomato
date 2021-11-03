@@ -124,10 +124,17 @@ hr {
   width: 100%;
 }
 
-.settings {
+/* .settings {
   padding-top: 20px;
+} */
+
+.container-settings-visible {
+  visibility: visible;
 }
 
+.container-settings-hidden {
+  visibility: hidden;
+}
 .app-container {
   display: flex;
   justify-content: space-evenly;
