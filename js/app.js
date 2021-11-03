@@ -34,9 +34,15 @@ function classTogler(element, firstClass, secondClass) {
       element.classList.replace(secondClass, firstClass);
       return;
     }
-    console.log('nothing');
   };
 }
+
+function darkMode() {
+  document.querySelector('.flex-container')
+  .classList.add('dark-mode');
+  document.querySelector('.flex-container.container-base')
+  .classList.add('dark-mode');
+  }
 
 const toggleControlButton = classTogler(controlButton, playButton, pauseButton);
 const toggleDarkModeButton = classTogler(darkModeButton, moonDarkModeButton, sunDarkModeButton);
@@ -110,6 +116,7 @@ stopButton.addEventListener('click', () => {
 
 darkModeButton.addEventListener('click', () => {
   toggleDarkModeButton();
+  darkMode();
 });
 
 pomodoroWorker.onmessage = (message) => {
