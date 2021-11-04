@@ -12,8 +12,8 @@ const playButton = 'fa-play-circle';
 const pauseButton = 'fa-pause-circle';
 const moonDarkModeButton = 'fa-moon';
 const sunDarkModeButton = 'fa-sun';
-const tomatoImage = '<img src="./favicon-32.png" alt="tomato">';
-const pomodoroEndSound = './ding.mp3';
+const tomatoImage = '<img src="./assets/img/favicon-32.png" alt="tomato">';
+const pomodoroEndSound = './assets/sound/ding.mp3';
 
 let isIndarkMode = false;
 let currentTask = {};
