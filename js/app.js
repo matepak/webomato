@@ -15,6 +15,11 @@ const sunDarkModeButton = 'fa-sun';
 const tomatoImage = '<img src="./assets/img/favicon-32.png" alt="tomato">';
 const pomodoroEndSound = './assets/sound/ding.mp3';
 
+let timeInput = document.querySelector('#pomodoro-time');
+let shortBreakInput = document.querySelector('#short-break-time');
+let longBreakInput = document.querySelector('#long-break-time');
+let longBreakIntervalInput = document.querySelector('#long-break-after');
+
 let isIndarkMode = false;
 let currentTask = {};
 let isPaused = false;
@@ -23,6 +28,19 @@ let isPaused = false;
 //   currentTask = Task.createTask('task_place_holder');
 //   taskField.innerText = currentTask.taskTitle;
 // }());
+
+function initWorker() {
+  pomodoroWorker.postMessage({
+    message: 'init', 
+    args: {
+      pomodoroTime: timeInput.value,
+      shortBreakTime: shortBreakInput.value,
+      longBreakTime: longBreakInput.value,
+      longBreakAfterInterval: longBreakIntervalInput.value
+    }})
+}
+
+initWorker();
 
 function classTogler(element, firstClass, secondClass) {
   return () => {
@@ -45,6 +63,7 @@ function darkMode() {
   .classList.add('dark-mode');
   document.querySelector('.base-container')
   .classList.add('dark-mode');
+  settingsContainer.classList.add('dark-mode');
   }
 
 function lightMode() {
@@ -54,12 +73,18 @@ function lightMode() {
   .classList.remove('dark-mode');
   document.querySelector('.base-container')
   .classList.remove('dark-mode');
+  settingsContainer.classList.remove('dark-mode');
   }
 
 
 
 const toggleControlButton = classTogler(controlButton, playButton, pauseButton);
 const toggleDarkModeButton = classTogler(darkModeButton, moonDarkModeButton, sunDarkModeButton);
+const togleSettingsVisibility = classTogler(
+  settingsContainer,
+  'container-settings-hidden',
+  'container-settings-visible'
+  );
 
 function showStopButton() {
   stopButton.style.display = 'inline';
@@ -67,11 +92,15 @@ function showStopButton() {
 
 function pauseTimer() {
   isPaused = true;
-  pomodoroWorker.postMessage('pause');
+  pomodoroWorker.postMessage({message: 'pause'});
 }
 
 function startTimer() {
-  pomodoroWorker.postMessage('start');
+  pomodoroWorker.postMessage({message: 'start'});
+}
+
+function stopTimer() {
+  pomodoroWorker.postMessage({message: 'stop'});
 }
 
 function clearBar() {
@@ -102,10 +131,6 @@ function controlButtonHandler() {
       break;
     default:
   }
-}
-
-function stopTimer() {
-  pomodoroWorker.postMessage('stop');
 }
 
 function playSound() {
@@ -141,6 +166,13 @@ darkModeButton.addEventListener('click', () => {
     return;
   }
 });
+
+settingsButton.addEventListener('click', () => {togleSettingsVisibility()});
+
+timeInput.addEventListener('input', () => {initWorker()});
+shortBreakInput.addEventListener('input', () => {initWorker()});
+longBreakInput.addEventListener('input', () => {initWorker()});
+longBreakIntervalInput.addEventListener('input', () => {initWorker()});
 
 pomodoroWorker.onmessage = (message) => {
   switch (message.data.action) {

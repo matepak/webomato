@@ -1,9 +1,19 @@
 importScripts('./pomodoro.js');
 
-const pomodoro = new Pomodoro();
+let pomodoro;
 
-onmessage = (message) => {
-  switch (message.data) {
+onmessage = (m) => {
+  switch (m.data.message) {
+    case 'init':
+      if(pomodoro) {delete pomodoro};
+      let args = m.data.args;
+      pomodoro = new Pomodoro(
+        args['pomodoroTime'], 
+        args['shortBreakTime'], 
+        args['longBreakTime'], 
+        args['longBreakAfterInterval'])
+        console.log('init fired');
+      break;
     case 'start':
       pomodoro.start();
       break;

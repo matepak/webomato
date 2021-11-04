@@ -88,6 +88,10 @@ li:hover {
 background-color:#403f3f;
 }
 
+#settings-container.dark-mode {
+  background-color:#403f3f;
+}
+
 .task.container-base {
   margin-top: 5px;
   width: 450px;
