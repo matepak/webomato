@@ -34,7 +34,7 @@ function initWorker() {
 
 initWorker();
 
-function classTogler(element, firstClass, secondClass) {
+function cssClassTogler(element, firstClass, secondClass) {
   return () => {
     if (element.classList.contains(firstClass)) {
       element.classList.replace(firstClass, secondClass);
@@ -70,9 +70,9 @@ function lightMode() {
 
 
 
-const toggleControlButton = classTogler(controlButton, playButton, pauseButton);
-const toggleDarkModeButton = classTogler(darkModeButton, moonDarkModeButton, sunDarkModeButton);
-const togleSettingsVisibility = classTogler(
+const toggleControlButton = cssClassTogler(controlButton, playButton, pauseButton);
+const toggleDarkModeButton = cssClassTogler(darkModeButton, moonDarkModeButton, sunDarkModeButton);
+const togleSettingsVisibility = cssClassTogler(
   settingsContainer,
   'container-settings-hidden',
   'container-settings-visible'
@@ -160,7 +160,6 @@ darkModeButton.addEventListener('click', () => {
 });
 
 settingsButton.addEventListener('click', () => {togleSettingsVisibility()});
-
 timeInput.addEventListener('input', () => {initWorker()});
 shortBreakInput.addEventListener('input', () => {initWorker()});
 longBreakInput.addEventListener('input', () => {initWorker()});
