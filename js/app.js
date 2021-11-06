@@ -15,6 +15,7 @@ import {
 } from './const.js';
 
 import {cssClassTogler} from './css_class_togler.js';
+import {darkMode, lightMode} from './dark_mode.js';
 
 let timeInput = document.querySelector('#pomodoro-time');
 let shortBreakInput = document.querySelector('#short-break-time');
@@ -35,30 +36,6 @@ function initWorker() {
 }
 
 initWorker();
-
-
-
-function darkMode() {
-  document.querySelector('ul')
-  .classList.add('dark-mode');
-  document.querySelector('.flex-container')
-  .classList.add('dark-mode');
-  document.querySelector('.base-container')
-  .classList.add('dark-mode');
-  settingsContainer.classList.add('dark-mode');
-  }
-
-function lightMode() {
-  document.querySelector('ul')
-  .classList.remove('dark-mode');
-  document.querySelector('.flex-container')
-  .classList.remove('dark-mode');
-  document.querySelector('.base-container')
-  .classList.remove('dark-mode');
-  settingsContainer.classList.remove('dark-mode');
-  }
-
-
 
 const toggleControlButton = cssClassTogler(controlButton, playButton, pauseButton);
 const toggleDarkModeButton = cssClassTogler(darkModeButton, moonDarkModeButton, sunDarkModeButton);
