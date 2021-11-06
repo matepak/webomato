@@ -8,20 +8,17 @@ import {
   stopButton,
   playButton,
   pauseButton,
-  moonDarkModeButton,
-  sunDarkModeButton,
   tomatoImage,
   pomodoroEndSound
 } from './const.js';
 
 import {cssClassTogler} from './css_class_togler.js';
-import {darkMode, lightMode} from './dark_mode.js';
+import './dark_mode.js';
 
 let timeInput = document.querySelector('#pomodoro-time');
 let shortBreakInput = document.querySelector('#short-break-time');
 let longBreakInput = document.querySelector('#long-break-time');
 let longBreakIntervalInput = document.querySelector('#long-break-after');
-let isIndarkMode = false;
 let isPaused = false;
 
 function initWorker() {
@@ -38,7 +35,7 @@ function initWorker() {
 initWorker();
 
 const toggleControlButton = cssClassTogler(controlButton, playButton, pauseButton);
-const toggleDarkModeButton = cssClassTogler(darkModeButton, moonDarkModeButton, sunDarkModeButton);
+
 const toggleSettingsVisibility = cssClassTogler(
   settingsContainer,
   'container-settings-hidden',
@@ -110,20 +107,6 @@ controlButton.addEventListener('click', () => {
 
 stopButton.addEventListener('click', () => {
   stopButtonHandler();
-});
-
-darkModeButton.addEventListener('click', () => {
-  toggleDarkModeButton();
-  if(!isIndarkMode) {
-    darkMode();
-    isIndarkMode = true;
-    return;
-  }
-  if(isIndarkMode) {
-    lightMode();
-    isIndarkMode = false;
-    return;
-  }
 });
 
 settingsButton.addEventListener('click', () => {toggleSettingsVisibility()});
