@@ -62,7 +62,7 @@ function lightMode() {
 
 const toggleControlButton = cssClassTogler(controlButton, playButton, pauseButton);
 const toggleDarkModeButton = cssClassTogler(darkModeButton, moonDarkModeButton, sunDarkModeButton);
-const togleSettingsVisibility = cssClassTogler(
+const toggleSettingsVisibility = cssClassTogler(
   settingsContainer,
   'container-settings-hidden',
   'container-settings-visible'
@@ -149,7 +149,7 @@ darkModeButton.addEventListener('click', () => {
   }
 });
 
-settingsButton.addEventListener('click', () => {togleSettingsVisibility()});
+settingsButton.addEventListener('click', () => {toggleSettingsVisibility()});
 timeInput.addEventListener('input', () => {initWorker()});
 shortBreakInput.addEventListener('input', () => {initWorker()});
 longBreakInput.addEventListener('input', () => {initWorker()});
