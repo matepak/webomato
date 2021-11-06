@@ -14,6 +14,8 @@ import {
   pomodoroEndSound
 } from './const.js';
 
+import {cssClassTogler} from './css_class_togler.js';
+
 let timeInput = document.querySelector('#pomodoro-time');
 let shortBreakInput = document.querySelector('#short-break-time');
 let longBreakInput = document.querySelector('#long-break-time');
@@ -34,19 +36,7 @@ function initWorker() {
 
 initWorker();
 
-function cssClassTogler(element, firstClass, secondClass) {
-  return () => {
-    if (element.classList.contains(firstClass)) {
-      element.classList.replace(firstClass, secondClass);
-      return;
-    }
 
-    if (element.classList.contains(secondClass)) {
-      element.classList.replace(secondClass, firstClass);
-      return;
-    }
-  };
-}
 
 function darkMode() {
   document.querySelector('ul')
