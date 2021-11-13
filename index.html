@@ -33,18 +33,18 @@
       <div id="progress-bar" class="rounded-container"></div>
     </div>
     <div id="settings-container" class="flex-container container-settings-hidden base-container">
-      <p>Pomodoro time</p>
+      <p>Pomodoro time (minutes)</p>
       <input id="pomodoro-time" type="range" min="1" max="60" step="1" value="20" oninput="pomodoro_range.value = value">
       <output id="pomodoro_range">20</output>
-      <p>Short Break</p>
+      <p>Short break (minutes)</p>
       <input id="short-break-time" type="range" min="1" max="30" step="1" value="5"
         oninput="short_break_range.value = value">
       <output id="short_break_range">5</output>
-      <p>Long Break</p>
+      <p>Long break (minutes)</p>
       <input id="long-break-time" type="range" min="1" max="30" step="1" value="15"
         oninput="long_break_range.value = value">
       <output id="long_break_range">15</output>
-      <p>Long Break After</p>
+      <p>Long break interval (pomodoros)</p>
       <input id="long-break-after" type="range" min="1" max="5" step="1" value="4" oninput="long_break_after_range.value = value">
       <output id="long_break_after_range">4</output>
     </div>
