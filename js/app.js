@@ -20,6 +20,20 @@ let shortBreakInput = document.querySelector('#short-break-time');
 let longBreakInput = document.querySelector('#long-break-time');
 let longBreakIntervalInput = document.querySelector('#long-break-after');
 let isPaused = false;
+let lock = null;
+
+async function requestWakeLock() {
+  if ('wakeLock' in navigator) {
+    try {
+      lock = await navigator.wakeLock.request();
+      lock.addEventListener('release', () => {
+         console.log('wakelock released:', lock.released);
+       });
+    } catch (ex) {
+      console.error(ex.message);
+    }
+  }
+}
 
 function initWorker() {
   pomodoroWorker.postMessage({
@@ -51,11 +65,13 @@ function pauseTimer() {
   pomodoroWorker.postMessage({message: 'pause'});
 }
 
-function startTimer() {
+async function startTimer() {
+  await requestWakeLock();
   pomodoroWorker.postMessage({message: 'start'});
 }
 
 function stopTimer() {
+  if(lock) lock.release();
   pomodoroWorker.postMessage({message: 'stop'});
 }
 
