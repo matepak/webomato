@@ -9,10 +9,11 @@ import {
   playButton,
   pauseButton,
   tomatoImage,
-  pomodoroEndSound
+  pomodoroEndSound,
 } from './const.js';
 
-import {cssClassTogler} from './css_class_togler.js';
+import { progressBar } from './progress_bar.js';
+import { cssClassTogler } from './css_class_togler.js';
 import './dark_mode.js';
 
 let timeInput = document.querySelector('#pomodoro-time');
@@ -20,6 +21,7 @@ let shortBreakInput = document.querySelector('#short-break-time');
 let longBreakInput = document.querySelector('#long-break-time');
 let longBreakIntervalInput = document.querySelector('#long-break-after');
 let isPaused = false;
+let isStarted = false;
 let lock = null;
 
 async function requestWakeLock() {
@@ -27,8 +29,8 @@ async function requestWakeLock() {
     try {
       lock = await navigator.wakeLock.request();
       lock.addEventListener('release', () => {
-         console.log('wakelock released:', lock.released);
-       });
+        console.log('wakelock released:', lock.released);
+      });
     } catch (ex) {
       console.error(ex.message);
     }
@@ -36,25 +38,31 @@ async function requestWakeLock() {
 }
 
 function initWorker() {
+  if (isStarted || isPaused) return;
   pomodoroWorker.postMessage({
-    message: 'init', 
+    message: 'init',
     args: {
       pomodoroTime: timeInput.value,
       shortBreakTime: shortBreakInput.value,
       longBreakTime: longBreakInput.value,
-      longBreakAfterInterval: longBreakIntervalInput.value
-    }})
+      longBreakAfterInterval: longBreakIntervalInput.value,
+    },
+  });
 }
 
 initWorker();
 
-const toggleControlButton = cssClassTogler(controlButton, playButton, pauseButton);
+const toggleControlButton = cssClassTogler(
+  controlButton,
+  playButton,
+  pauseButton,
+);
 
 const toggleSettingsVisibility = cssClassTogler(
   settingsContainer,
   'container-settings-hidden',
-  'container-settings-visible'
-  );
+  'container-settings-visible',
+);
 
 function showStopButton() {
   stopButton.style.display = 'inline';
@@ -62,21 +70,24 @@ function showStopButton() {
 
 function pauseTimer() {
   isPaused = true;
-  pomodoroWorker.postMessage({message: 'pause'});
+  pomodoroWorker.postMessage({ message: 'pause' });
 }
 
 async function startTimer() {
   await requestWakeLock();
-  pomodoroWorker.postMessage({message: 'start'});
+  pomodoroWorker.postMessage({ message: 'start' });
+  isStarted = true;
 }
 
 function stopTimer() {
-  if(lock) lock.release();
-  pomodoroWorker.postMessage({message: 'stop'});
+  if (lock) lock.release();
+  pomodoroWorker.postMessage({ message: 'stop' });
+  isStarted = false;
 }
 
 function clearBar() {
-  document.getElementById('progress-bar').innerHTML = ' ';
+  document.getElementById('progress-bar-container').innerHTML =
+    progressBar.reset();
 }
 
 function hideStopButton() {
@@ -115,7 +126,13 @@ function stopButtonHandler() {
   stopTimer();
   playSound();
   hideStopButton();
+  progressBar.reset();
 }
+
+document.addEventListener('load', () => {
+  document.getElementById('progress-bar-container').innerHTML =
+    progressBar.reset();
+});
 
 controlButton.addEventListener('click', () => {
   controlButtonHandler();
@@ -125,19 +142,31 @@ stopButton.addEventListener('click', () => {
   stopButtonHandler();
 });
 
-settingsButton.addEventListener('click', () => {toggleSettingsVisibility()});
-timeInput.addEventListener('input', () => {initWorker()});
-shortBreakInput.addEventListener('input', () => {initWorker()});
-longBreakInput.addEventListener('input', () => {initWorker()});
-longBreakIntervalInput.addEventListener('input', () => {initWorker()});
+settingsButton.addEventListener('click', () => {
+  toggleSettingsVisibility();
+});
+timeInput.addEventListener('input', () => {
+  initWorker();
+});
+shortBreakInput.addEventListener('input', () => {
+  initWorker();
+});
+longBreakInput.addEventListener('input', () => {
+  initWorker();
+});
+longBreakIntervalInput.addEventListener('input', () => {
+  initWorker();
+});
 
 pomodoroWorker.onmessage = (message) => {
   switch (message.data.action) {
     case 'updateTimerElement':
-      document.getElementById('timer').innerText = message.data.actionData;
-      break;
-    case 'updateProgressBar':
-      document.getElementById('progress-bar').innerHTML += tomatoImage;
+      if (isStarted) {
+        document.getElementById('progress-bar-container').innerHTML =
+          progressBar.getBar(message.data.actionData.miliseconds);
+      }
+      document.getElementById('timer').innerText =
+        message.data.actionData.timer;
       break;
     case 'stopTimer':
       stopButtonHandler();

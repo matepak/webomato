@@ -16,7 +16,6 @@ class Pomodoro {
     this.shortBrakesLeft = longBreakAfterInterval;
     this.currentBreakTime = shortBreakTime;
     this.timer = new Timer(pomodoroTime);
-    this.progressBarCount = 0;
     this.updateTimer();
   }
 
@@ -24,20 +23,16 @@ class Pomodoro {
     updateTimerElement: function (data) {
       return { action: "updateTimerElement", actionData: data };
     },
-    updateProgressBar: function () {
-      return { action: "updateProgressBar", actionData: null };
-    },
-
-    clearProgressBar: function () {
-      return { action: "clearProgressBar", actionData: null };
-    },
     stopTimer: function () {
       return { action: "stopTimer", actionData: null };
     },
   };
 
   updateTimer() {
-    postMessage(this.actionObject.updateTimerElement(this.timer.getTimer()));
+    postMessage(this.actionObject.updateTimerElement({
+      timer: this.timer.getTimer(), 
+      miliseconds: this.timer.getMiliseconds()
+    }));
   }
 
   start() {
@@ -51,16 +46,12 @@ class Pomodoro {
       this.timer.tick();
       this.updateTimer();
     }, 100);
-    postMessage(this.actionObject.clearProgressBar());
-    this.progressBar();
   }
 
   stop() {
     this.nextTimer();
     this.isPaused = false;
-    this.progressBarCount = 0;
     clearInterval(this.intervalId);
-    clearInterval(this.progressBarIntervalId);
     this.timer.reset();
   }
 
@@ -68,7 +59,6 @@ class Pomodoro {
     this.timer.pause();
     this.isPaused = true;
     clearInterval(this.intervalId);
-    clearInterval(this.progressBarIntervalId);
   }
 
   nextTimer() {
@@ -85,18 +75,5 @@ class Pomodoro {
     } else {
       return this.shortBreakTime;
     }
-  }
-
-  progressBar() {
-    let duration = this.timer.duration;
-    if (duration < 1) duration = 1;
-    this.progressBarInterval = duration / (11 - this.progressBarCount);
-    console.log(duration);
-
-    this.progressBarIntervalId = setInterval(() => {
-      postMessage(this.actionObject.updateProgressBar());
-      this.progressBarCount++;
-    }, this.progressBarInterval);
-
   }
 }

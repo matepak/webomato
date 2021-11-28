@@ -12,7 +12,6 @@ onmessage = (m) => {
         args['shortBreakTime'], 
         args['longBreakTime'], 
         args['longBreakAfterInterval'])
-        console.log('init fired');
       break;
     case 'start':
       pomodoro.start();
