@@ -3,12 +3,9 @@ import {
   controlButton,
   settingsButton,
   settingsContainer,
-  darkModeButton,
-  taskField,
   stopButton,
   playButton,
   pauseButton,
-  tomatoImage,
   pomodoroEndSound,
 } from './const.js';
 
