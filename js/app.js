@@ -128,12 +128,6 @@ function stopButtonHandler() {
   hideStopButton();
   progressBar.reset();
 }
-
-document.addEventListener('load', () => {
-  document.getElementById('progress-bar-container').innerHTML =
-    progressBar.reset();
-});
-
 controlButton.addEventListener('click', () => {
   controlButtonHandler();
 });
@@ -163,7 +157,7 @@ pomodoroWorker.onmessage = (message) => {
     case 'updateTimerElement':
       if (isStarted) {
         document.getElementById('progress-bar-container').innerHTML =
-          progressBar.getBar(message.data.actionData.miliseconds);
+          progressBar.getBar(message.data.actionData.secondsToEnd);
       }
       document.getElementById('timer').innerText =
         message.data.actionData.timer;

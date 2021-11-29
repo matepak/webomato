@@ -31,7 +31,7 @@ class Pomodoro {
   updateTimer() {
     postMessage(this.actionObject.updateTimerElement({
       timer: this.timer.getTimer(), 
-      miliseconds: this.timer.getMiliseconds()
+      secondsToEnd: this.timer.getSecondsToEnd()
     }));
   }
 

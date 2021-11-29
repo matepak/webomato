@@ -44,8 +44,8 @@ class Timer {
   isFinished() {
     return (this.getMinutes() <= 0 && this.getSeconds() <= 0);
   }
-  getMiliseconds() {
-    return (this.duration - this.difference);
+  getSecondsToEnd() {
+    return millisecondsToSeconds(this.duration - this.difference);
   }
 
   getSeconds() {
