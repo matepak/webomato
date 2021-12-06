@@ -1,11 +1,9 @@
 function minutesToMilliseconds(minutes) {
   return minutes * 60000;
 }
-
 function millisecondsToSeconds(milliseconds) {
   return Math.floor(milliseconds / 1000);
 }
-// eslint-disable-next-line no-unused-vars
 class Timer {
   constructor(duration = 1) {
     this.isPaused = false;
@@ -42,16 +40,14 @@ class Timer {
   }
 
   isFinished() {
-    return (this.getMinutes() <= 0 && this.getSeconds() <= 0);
+    return this.getMinutes() <= 0 && this.getSeconds() <= 0;
   }
   getSecondsToEnd() {
     return millisecondsToSeconds(this.duration - this.difference);
   }
 
   getSeconds() {
-    return (
-      millisecondsToSeconds(this.duration - this.difference) % 60
-    );
+    return millisecondsToSeconds(this.duration - this.difference) % 60;
   }
 
   getMinutes() {
@@ -61,9 +57,8 @@ class Timer {
   }
 
   getTimer() {
-    return `${this.getMinutes().toString().padStart(2, '0')}:${this.getSeconds().toString().padStart(
-      2,
-      '0',
-    )}`;
+    return `${this.getMinutes().toString().padStart(2, '0')}:${this.getSeconds()
+      .toString()
+      .padStart(2, '0')}`;
   }
 }
