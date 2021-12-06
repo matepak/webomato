@@ -115,7 +115,9 @@ function controlButtonHandler() {
 
 function playSound() {
   const audio = new Audio(pomodoroEndSound);
-  audio.play();
+  audio.addEventListener("canplaythrough", event => {
+    audio.play();
+  });
 }
 
 function stopButtonHandler() {
