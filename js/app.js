@@ -138,16 +138,21 @@ stopButton.addEventListener('click', () => {
 settingsButton.addEventListener('click', () => {
   toggleSettingsVisibility();
 });
-timeInput.addEventListener('input', () => {
-  initWorker();
-});
-shortBreakInput.addEventListener('input', () => {
-  initWorker();
-});
-longBreakInput.addEventListener('input', () => {
-  initWorker();
-});
-longBreakIntervalInput.addEventListener('input', () => {
+// timeInput.addEventListener('input', () => {
+//   initWorker();
+// });
+// shortBreakInput.addEventListener('input', () => {
+//   initWorker();
+// });
+// longBreakInput.addEventListener('input', () => {
+//   initWorker();
+// });
+// longBreakIntervalInput.addEventListener('input', () => {
+//   initWorker();
+// });
+
+document.querySelector("#setings-confirmation-button")
+.addEventListener('click', () => {
   initWorker();
 });
 
