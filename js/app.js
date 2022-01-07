@@ -10,7 +10,7 @@ import {
 } from './const.js';
 
 import { progressBar } from './progress_bar.js';
-import { cssClassTogler } from './css_class_togler.js';
+import { ClassTogler } from './css_class_togler.js';
 import './dark_mode.js';
 
 let timeInput = document.querySelector('#pomodoro-time');
@@ -45,17 +45,15 @@ function initWorker() {
       longBreakAfterInterval: longBreakIntervalInput.value,
     },
   });
-}
+};
 
-initWorker();
-
-const toggleControlButton = cssClassTogler(
+const toggleControlButton = ClassTogler (
   controlButton,
   playButton,
   pauseButton,
 );
 
-const toggleSettingsVisibility = cssClassTogler(
+const toggleSettingsVisibility = ClassTogler(
   settingsContainer,
   'container-settings-hidden',
   'container-settings-visible',
@@ -161,3 +159,8 @@ pomodoroWorker.onmessage = (message) => {
     default:
   }
 };
+
+(function main() {
+  initWorker();
+
+})();
