@@ -10,7 +10,7 @@ import {
 } from './const.js';
 
 import { progressBar } from './progress_bar.js';
-import { ClassTogler } from './css_class_togler.js';
+import { ClassToggler } from './css_class_togler.js';
 import './dark_mode.js';
 
 let timeInput = document.querySelector('#pomodoro-time');
@@ -47,13 +47,13 @@ function initWorker() {
   });
 };
 
-const toggleControlButton = ClassTogler (
+const toggleControlButton = ClassToggler (
   controlButton,
   playButton,
   pauseButton,
 );
 
-const toggleSettingsVisibility = ClassTogler(
+const toggleSettingsVisibility = ClassToggler(
   settingsContainer,
   'container-settings-hidden',
   'container-settings-visible',

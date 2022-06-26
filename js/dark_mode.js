@@ -1,7 +1,7 @@
-import { cssClassTogler } from "./css_class_togler.js";
+import { ClassToggler } from "./css_class_togler.js";
 import { darkModeButton, moonDarkModeButton, sunDarkModeButton } from "./const.js";
 
-const toggleDarkModeButton = cssClassTogler(darkModeButton, moonDarkModeButton, sunDarkModeButton);
+const toggleDarkModeButton = ClassToggler(darkModeButton, moonDarkModeButton, sunDarkModeButton);
 
 let isInDarkMode = false;
 
