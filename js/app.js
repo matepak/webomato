@@ -1,8 +1,6 @@
 import {
   pomodoroWorker,
   controlButton,
-  settingsButton,
-  settingsContainer,
   stopButton,
   playButton,
   pauseButton,
@@ -53,11 +51,6 @@ const toggleControlButton = ClassToggler (
   pauseButton,
 );
 
-const toggleSettingsVisibility = ClassToggler(
-  settingsContainer,
-  'container-settings-hidden',
-  'container-settings-visible',
-);
 
 function showStopButton() {
   stopButton.style.display = 'inline';
@@ -90,7 +83,7 @@ function hideStopButton() {
 }
 
 function controlButtonHandler() {
-  const controlButtonClass = controlButton.classList[0];
+  const controlButtonClass = controlButton.classList[1];
   switch (controlButtonClass) {
     case playButton:
       startTimer();
@@ -131,10 +124,6 @@ controlButton.addEventListener('click', () => {
 
 stopButton.addEventListener('click', () => {
   stopButtonHandler();
-});
-
-settingsButton.addEventListener('click', () => {
-  toggleSettingsVisibility();
 });
 
 document.querySelector("#setings-confirmation-button")

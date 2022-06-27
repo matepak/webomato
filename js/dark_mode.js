@@ -8,9 +8,9 @@ let isInDarkMode = false;
 function darkMode() {
     document.querySelector('ul')
     .classList.add('dark-mode');
-    document.querySelector('.flex-container')
+    document.querySelector('body')
     .classList.add('dark-mode');
-    document.querySelector('.base-container')
+    document.querySelector('.pomodoro')
     .classList.add('dark-mode');
     document.querySelector('#settings-container')
     .classList.add('dark-mode');
@@ -21,9 +21,9 @@ function darkMode() {
   function lightMode() {
     document.querySelector('ul')
     .classList.remove('dark-mode');
-    document.querySelector('.flex-container')
+    document.querySelector('body')
     .classList.remove('dark-mode');
-    document.querySelector('.base-container')
+    document.querySelector('.pomodoro')
     .classList.remove('dark-mode');
     document.querySelector('#settings-container')
     .classList.remove('dark-mode');

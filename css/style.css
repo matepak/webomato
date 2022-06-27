@@ -1,22 +1,36 @@
-@font-face{ 
-	font-family: "dseg7_modernbold";
-	src: url("/webomato/assets/fonts/dseg7_modernbold.woff") format("woff"),
-       url("/webomato/assets/fonts/dseg7_modernbold.woff2") format("woff2");
-}
-html,
-body {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  background-color: #9c443c;
+@font-face {
+  font-family: "dseg7_modernbold";
+  src: url("/assets/fonts/dseg7_modernbold.woff") format("woff"),
+    url("/assets/fonts/dseg7_modernbold.woff2") format("woff2");
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #CD6155;
+body {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px 1fr;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #fef9f8;
+}
+
+body.dark-mode {
+  background-color: black;
+}
+
+ ul {
+  /* display: flex;
+  justify-content: center;
+  list-style-type: none; */
+  background-color: #ef9273;
+} 
+
+ul.dark-mode {
+  background-color: #403f3f;
+}
+
+ul.dark-mode li:hover {
+  background-color: #1f1e1e;
 }
 
 li {
@@ -30,7 +44,15 @@ li a {
 }
 
 li:hover {
-  background-color: #C0392B;
+  background-color: #ffae93;
+}
+
+hr {
+  border-top: 2px dashed #8c8b8b;
+}
+
+.fas:hover {
+  color: rgb(255, 72, 0);
 }
 
 .navigation {
@@ -38,35 +60,21 @@ li:hover {
   text-align: center;
 }
 
-.task {
-  margin-top: 15px;
-  font-family: 'Roboto:wght@300', sans-serif;;
-  font-size: 25px;
-  color: white;
+.bi {
+  color: #fef9f8;
+  font-size: 75px !important;
 }
 
-.far {
-  color: white;
+.pomodoro {
+  width: 500px;
+  height: 500px;
+  border-radius: 5%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  background-color: #ef9273;
 }
 
-.flex-container {
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  display: flex;
-}
-.base-container {
-  width: 25em;
-  height: 25em;
-  margin: auto;
-  align-items: center;
-  justify-content:space-evenly;
-  flex-direction: column;
-  background-color:#CD6155;
-  display: flex;
-  border-radius: 25px;
-}
 .rounded-container {
   display: flex;
   align-items: center;
@@ -78,58 +86,49 @@ li:hover {
   width: 330px;
 }
 
+
 .timer {
-  font-size: 100px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 6em;
   font-family: 'dseg7_modernbold', normal;
-  color: white;
+  color: rgb(255, 255, 255);
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pomodoro-progress {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-container {
+  width: 25em;
+  height: 25em;
+  margin: auto;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  display: flex;
+  border-radius: 25px;
+  background-color: #fef9f8;
+  
+}
+
+.settings-container.dark-mode {
+  background-color: #403f3f;
+}
+
+.pomodoro.dark-mode {
+  background-color:  #403f3f;
 }
 
 #stop-btn {
   display: none;
-}
-
-.base-container.dark-mode { 
-background-color:#403f3f;
-}
-
-#settings-container.dark-mode {
-  background-color:#403f3f;
-}
-
-.task.container-base {
-  margin-top: 5px;
-  width: 450px;
-  height: 200px;
-  justify-content: flex-start;
-}
-
-#message-field {
-  visibility: hidden;
-  font-family: "Press Start 2P", cursive;
-  font-size: 50px;
-  color: wheat;
-}
-
-hr {
-	border-top: 2px dashed #8c8b8b;
-}
-
-.container-settings-visible {
-  visibility: visible;
-}
-
-.container-settings-hidden {
-  visibility: hidden;
-}
-
-.flex-container.dark-mode {
-  background-color: black;
-}
-
-ul.dark-mode {
-  background-color: #403f3f;
-}
-
-ul.dark-mode li:hover {
-  background-color: #1f1e1e;
 }
