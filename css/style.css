@@ -1,7 +1,7 @@
 @font-face{ 
 	font-family: "dseg7_modernbold";
-	src: url("/assets/fonts/dseg7_modernbold.woff") format("woff"),
-       url("/assets/fonts/dseg7_modernbold.woff2") format("woff2");
+	src: url("/webomato/assets/fonts/dseg7_modernbold.woff") format("woff"),
+       url("/webomato/assets/fonts/dseg7_modernbold.woff2") format("woff2");
 }
 html,
 body {
