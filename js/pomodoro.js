@@ -71,6 +71,7 @@ class Pomodoro {
     if (!this.lastPomodoroRun) return this.pomodoroTime;
     if (this.lastPomodoroRun) this.shortBrakesLeft -= 1;
     if (this.shortBrakesLeft === 0) {
+      this.shortBrakesLeft = this.longBreakAfterInterval;
       return this.longBreakTime;
     } else {
       return this.shortBreakTime;
