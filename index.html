@@ -27,12 +27,12 @@
     </ul>
   </nav>
   <div class="pomodoro">
-    <div  id= "timer" class ="timer"></div>
+    <div id="timer" class="timer"></div>
     <div class="button-row">
       <i id="control-btn" class="bi bi-play-circle"></i>
       <i id="stop-btn" class="bi bi-stop-circle"></i>
     </div>
-    <div id="progress-bar-container" class = "pomodoro-progress">
+    <div id="progress-bar-container" class="pomodoro-progress">
       <div id="progress-bar" class="rounded-container"></div>
     </div>
   </div>
@@ -48,7 +48,35 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>Pomodoro time (minutes)</p>
+<div class="input-group input-group-sm mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-sm">Pomodoro time</span>
+  </div>
+  <input id="pomodoro-time" type="number" class="form-control" aria-label="Pomodoro time"
+    aria-describedby="inputGroup-sizing-sm" value ="45" min="1" max="60">
+</div>
+<div class="input-group input-group-sm mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-sm">Short break</span>
+  </div>
+  <input id="short-break-time" type="number" class="form-control" aria-label="Short break time"
+    aria-describedby="inputGroup-sizing-sm" value="5" min ="1" max="15">
+</div>
+<div class="input-group input-group-sm mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-sm">Long break</span>
+  </div>
+  <input id="long-break-time" type="number" class="form-control" aria-label="Long break"
+    aria-describedby="inputGroup-sizing-sm" value="15" min="1" max="30">
+</div>
+<div class="input-group input-group-sm mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="inputGroup-sizing-sm">Long break after</span>
+  </div>
+  <input id="long-break-after" type="number" class="form-control" aria-label="Long breal after"
+    aria-describedby="inputGroup-sizing-sm" value="3" min="1" max="30">
+</div>
+          <!-- <p>Pomodoro time (minutes)</p>
           <input id="pomodoro-time" type="range" min="1" max="60" step="1" value="20"
             oninput="pomodoro_range.value = value">
           <output id="pomodoro_range">20</output>
@@ -63,11 +91,12 @@
           <p>Long break interval (pomodoros)</p>
           <input id="long-break-after" type="range" min="1" max="5" step="1" value="4"
             oninput="long_break_after_range.value = value">
-          <output id="long_break_after_range">4</output>
+          <output id="long_break_after_range">4</output> -->
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" id="setings-confirmation-button" class="btn btn-primary" data-dismiss="modal">Save
+          <button type="button" class="btn btn-settings" data-dismiss="modal">Close</button>
+          <button type="button" id="setings-confirmation-button" class="btn btn-settings"
+            data-dismiss="modal">Save
             changes</button>
         </div>
       </div>

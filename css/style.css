@@ -66,8 +66,8 @@ hr {
 }
 
 .pomodoro {
-  width: 500px;
-  height: 500px;
+  width: 350px;
+  height: 350px;
   border-radius: 5%;
   display: grid;
   grid-template-columns: 1fr;
@@ -108,17 +108,8 @@ hr {
   justify-content: center;
 }
 
-.settings-container {
-  width: 25em;
-  height: 25em;
-  margin: auto;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: column;
-  display: flex;
-  border-radius: 25px;
+.modal-body {
   background-color: #fef9f8;
-  
 }
 
 .settings-container.dark-mode {
@@ -129,6 +120,61 @@ hr {
   background-color:  #403f3f;
 }
 
+.modal-header {
+  color: #ffffff;
+  background-color: #ef9273;
+}
+
+.modal-footer {
+  background-color: #ef9273;
+}
+
 #stop-btn {
   display: none;
+}
+
+.btn-settings { 
+  color: #FFFFFF; 
+  background-color: #EF9273; 
+  border-color: #ffffff; 
+} 
+ 
+.btn-settings:hover, 
+.btn-settings:focus, 
+.btn-settings:active, 
+.btn-settings.active, 
+.open .dropdown-toggle.btn-settings { 
+  color: #FFFFFF; 
+  background-color: #FFAE93; 
+  border-color: #ffffff; 
+} 
+ 
+.btn-settings:active, 
+.btn-settings.active, 
+.open .dropdown-toggle.btn-settings { 
+  background-image: none; 
+} 
+ 
+.btn-settings.disabled, 
+.btn-settings[disabled], 
+fieldset[disabled] .btn-settings, 
+.btn-settings.disabled:hover, 
+.btn-settings[disabled]:hover, 
+fieldset[disabled] .btn-settings:hover, 
+.btn-settings.disabled:focus, 
+.btn-settings[disabled]:focus, 
+fieldset[disabled] .btn-settings:focus, 
+.btn-settings.disabled:active, 
+.btn-settings[disabled]:active, 
+fieldset[disabled] .btn-settings:active, 
+.btn-settings.disabled.active, 
+.btn-settings[disabled].active, 
+fieldset[disabled] .btn-settings.active { 
+  background-color: #EF9273; 
+  border-color: #ffffff; 
+} 
+ 
+.btn-settings .badge { 
+  color: #EF9273; 
+  background-color: #FFFFFF; 
 }
